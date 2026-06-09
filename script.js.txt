@@ -1,0 +1,949 @@
+/* ==========================================================
+   Alberta Math 7–12  |  script.js
+   ========================================================== */
+
+// ----------------------------------------------------------
+// GRADE DATA
+// ----------------------------------------------------------
+var GRADES = {
+  math7: {
+    id: 'math7', label: 'Math 7', tag: 'Grade 7',
+    tagClass: 'tag-jr', cardClass: '',
+    desc: 'Fractions, ratios, integers, geometry basics',
+    fullDesc: 'Alberta Mathematics Grade 7 — Number sense, spatial reasoning, patterns, and data.',
+    topics: [
+      'Integers and operations',
+      'Fractions and mixed numbers',
+      'Ratios and proportional thinking',
+      'Percentages and applications',
+      'Variables and expressions',
+      'Equations and problem solving',
+      'Geometry: angles and triangles',
+      'Area and perimeter',
+      'Transformations',
+      'Data collection and graphs'
+    ],
+    strands: ['Number', 'Patterns and Relations', 'Shape and Space', 'Statistics and Probability', 'Computational Thinking'],
+    outcomes: [
+      'Demonstrate understanding of integers including representation, ordering, and operations',
+      'Apply understanding of fractions, decimals, and percents to solve problems',
+      'Use variables and simple equations to model relationships',
+      'Explain and apply properties of 2D shapes and transformations',
+      'Collect, display, and interpret data using appropriate graphs'
+    ],
+    resources: [
+      { title: 'Math 7 Formula Sheet',        type: 'PDF',       badge: 'badge-pdf'   },
+      { title: 'Geometry Reference Card',      type: 'PDF',       badge: 'badge-pdf'   },
+      { title: 'Unit 1: Number Study Notes',   type: 'Guide',     badge: 'badge-guide' },
+      { title: 'Math 7 Practice Worksheet Set',type: 'Worksheet', badge: 'badge-sheet' }
+    ]
+  },
+
+  math8: {
+    id: 'math8', label: 'Math 8', tag: 'Grade 8',
+    tagClass: 'tag-jr', cardClass: '',
+    desc: 'Pythagorean theorem, percents, probability',
+    fullDesc: 'Alberta Mathematics Grade 8 — Building on number concepts, geometry, and data analysis.',
+    topics: [
+      'Square roots and perfect squares',
+      'Pythagorean theorem',
+      'Rational numbers',
+      'Percents: sales tax, discount, interest',
+      'Linear equations in one variable',
+      'Graphing in a coordinate plane',
+      'Surface area of 3D objects',
+      'Volume of prisms and cylinders',
+      'Probability and theoretical outcomes',
+      'Histograms and scatter plots'
+    ],
+    strands: ['Number', 'Patterns and Relations', 'Shape and Space', 'Statistics and Probability'],
+    outcomes: [
+      'Apply the Pythagorean theorem to solve problems',
+      'Demonstrate understanding of rational numbers including operations',
+      'Solve linear equations in one variable',
+      'Determine surface area and volume of 3D objects',
+      'Compare experimental and theoretical probability'
+    ],
+    resources: [
+      { title: 'Math 8 Formula Sheet',          type: 'PDF',       badge: 'badge-pdf'   },
+      { title: 'Pythagorean Theorem Worksheet',  type: 'Worksheet', badge: 'badge-sheet' },
+      { title: 'Math 8 Study Guide',             type: 'Guide',     badge: 'badge-guide' },
+      { title: '3D Geometry Reference',          type: 'PDF',       badge: 'badge-pdf'   }
+    ]
+  },
+
+  math9: {
+    id: 'math9', label: 'Math 9', tag: 'Grade 9',
+    tagClass: 'tag-jr', cardClass: '',
+    desc: 'Powers, polynomials, linear relations',
+    fullDesc: 'Alberta Mathematics Grade 9 — Algebraic thinking, linear relations, and statistics.',
+    topics: [
+      'Powers and exponent laws',
+      'Polynomials: add, subtract, multiply',
+      'Linear relations and patterns',
+      'Slope and rate of change',
+      'Equations of lines in slope-intercept form',
+      'Similarity and scale factors',
+      'Circle geometry',
+      'Statistics: sampling and data analysis',
+      'Financial mathematics',
+      'Probability of independent events'
+    ],
+    strands: ['Number', 'Patterns and Relations', 'Shape and Space', 'Statistics and Probability'],
+    outcomes: [
+      'Apply exponent laws to evaluate and simplify expressions',
+      'Factor and expand polynomials',
+      'Interpret and graph linear relations',
+      'Apply similarity in geometric contexts',
+      'Critically analyze statistical data and representations'
+    ],
+    resources: [
+      { title: 'Math 9 Formula Sheet',       type: 'PDF',       badge: 'badge-pdf'   },
+      { title: 'Polynomials Study Guide',    type: 'Guide',     badge: 'badge-guide' },
+      { title: 'Linear Relations Worksheet', type: 'Worksheet', badge: 'badge-sheet' },
+      { title: 'Diploma Prep Notes',         type: 'Guide',     badge: 'badge-guide' }
+    ]
+  },
+
+  math10c: {
+    id: 'math10c', label: 'Math 10C', tag: 'Grade 10',
+    tagClass: 'tag-sr', cardClass: 'hs',
+    desc: 'Combined pathway: measurement, algebra, functions',
+    fullDesc: 'Mathematics 10 Combined (10C) — Gateway to the -1 and -2 pathways.',
+    topics: [
+      'Measurement and unit conversions',
+      'Trigonometry of right triangles',
+      'SOHCAHTOA and applications',
+      'Factoring polynomials',
+      'Systems of linear equations',
+      'Functions: domain, range, notation',
+      'Linear and non-linear relations',
+      'Slope and equations of lines',
+      'Arithmetic sequences',
+      'Introduction to quadratics'
+    ],
+    strands: ['Measurement', 'Algebra and Number', 'Relations and Functions'],
+    outcomes: [
+      'Demonstrate understanding of measurement systems and unit conversion',
+      'Solve problems using right triangle trigonometry',
+      'Factor polynomial expressions by various methods',
+      'Analyze and solve systems of linear equations',
+      'Distinguish between functions and relations and use function notation'
+    ],
+    resources: [
+      { title: 'Math 10C Formula Sheet',       type: 'PDF',       badge: 'badge-pdf'   },
+      { title: 'Trigonometry Reference Card',  type: 'PDF',       badge: 'badge-pdf'   },
+      { title: 'Systems of Equations Guide',   type: 'Guide',     badge: 'badge-guide' },
+      { title: '10C Practice Exam',            type: 'Worksheet', badge: 'badge-sheet' }
+    ]
+  },
+
+  math103: {
+    id: 'math103', label: 'Math 10-3', tag: 'Grade 10',
+    tagClass: 'tag-sr', cardClass: 'hs',
+    desc: '-3 pathway: measurement, geometry, finances',
+    fullDesc: 'Mathematics 10-3 — Practical pathway emphasizing measurement, geometry, and financial math.',
+    topics: [
+      'Metric and imperial measurement',
+      'Area and perimeter of composite shapes',
+      'Volume and capacity',
+      'Scale diagrams and models',
+      'Surface area applications',
+      'Basic trigonometry',
+      'Introduction to personal finance',
+      'Graphical reasoning'
+    ],
+    strands: ['Measurement', 'Geometry', 'Number', 'Algebra'],
+    outcomes: [
+      'Solve problems involving measurement in metric and imperial units',
+      'Apply geometric concepts in real-world contexts',
+      'Interpret and create scale diagrams',
+      'Develop financial literacy skills',
+      'Use graphical tools to analyze relationships'
+    ],
+    resources: [
+      { title: 'Math 10-3 Formula Sheet',  type: 'PDF',       badge: 'badge-pdf'   },
+      { title: 'Measurement Study Guide',  type: 'Guide',     badge: 'badge-guide' },
+      { title: '10-3 Practice Set',        type: 'Worksheet', badge: 'badge-sheet' }
+    ]
+  },
+
+  math201: {
+    id: 'math201', label: 'Math 20-1', tag: 'Grade 11',
+    tagClass: 'tag-sr', cardClass: 'hs',
+    desc: '-1 pathway: quadratics, radicals, sequences',
+    fullDesc: 'Mathematics 20-1 — Advanced algebra, quadratic functions, and sequences.',
+    topics: [
+      'Quadratic functions: vertex and standard form',
+      'Factoring and the quadratic formula',
+      'Radical expressions and equations',
+      'Rational expressions and equations',
+      'Absolute value functions',
+      'Systems of equations',
+      'Quadratic inequalities',
+      'Arithmetic and geometric sequences',
+      'Introduction to series',
+      'Exponents and logarithms intro'
+    ],
+    strands: ['Algebra and Number', 'Relations and Functions'],
+    outcomes: [
+      'Analyze quadratic functions in multiple forms and apply to real contexts',
+      'Simplify and operate on radical and rational expressions',
+      'Solve quadratic and rational equations',
+      'Identify and apply arithmetic and geometric sequences',
+      'Model real-world problems with systems of equations'
+    ],
+    resources: [
+      { title: 'Math 20-1 Formula Sheet',       type: 'PDF',       badge: 'badge-pdf'   },
+      { title: 'Quadratics Study Guide',         type: 'Guide',     badge: 'badge-guide' },
+      { title: 'Radical Expressions Worksheet',  type: 'Worksheet', badge: 'badge-sheet' },
+      { title: '20-1 Practice Exam',             type: 'Worksheet', badge: 'badge-sheet' }
+    ]
+  },
+
+  math202: {
+    id: 'math202', label: 'Math 20-2', tag: 'Grade 11',
+    tagClass: 'tag-sr', cardClass: 'hs',
+    desc: '-2 pathway: geometry, stats, quadratics applied',
+    fullDesc: 'Mathematics 20-2 — Applied reasoning, geometry, and statistics.',
+    topics: [
+      'Inductive and deductive reasoning',
+      'Angle relationships in polygons',
+      'Triangle congruence and proofs',
+      'Circle properties and theorems',
+      'Proportional reasoning',
+      'Normal distribution and z-scores',
+      'Quadratic functions applied',
+      'Sequences and series',
+      'Financial applications',
+      'Probability and odds'
+    ],
+    strands: ['Logical Reasoning', 'Geometry', 'Statistics', 'Algebra and Number'],
+    outcomes: [
+      'Apply inductive and deductive reasoning to geometric proofs',
+      'Analyze properties of circles and polygons',
+      'Interpret data using normal distribution',
+      'Apply quadratic functions in problem contexts',
+      'Calculate probabilities and odds'
+    ],
+    resources: [
+      { title: 'Math 20-2 Formula Sheet',    type: 'PDF',   badge: 'badge-pdf'   },
+      { title: 'Geometry Proofs Guide',      type: 'Guide', badge: 'badge-guide' },
+      { title: 'Statistics Reference Sheet', type: 'PDF',   badge: 'badge-pdf'   }
+    ]
+  },
+
+  math203: {
+    id: 'math203', label: 'Math 20-3', tag: 'Grade 11',
+    tagClass: 'tag-sr', cardClass: 'hs',
+    desc: '-3 pathway: finance, measurement, geometry',
+    fullDesc: 'Mathematics 20-3 — Practical and workplace mathematics.',
+    topics: [
+      'Compound interest and credit',
+      'Budgeting and financial planning',
+      'Area, surface area, and volume',
+      'Trigonometry in applied contexts',
+      '3D objects and scale models',
+      'Statistics and graphs',
+      'Linear functions and modeling'
+    ],
+    strands: ['Algebra', 'Geometry', 'Measurement', 'Statistics', 'Number'],
+    outcomes: [
+      'Apply compound interest and financial formulas',
+      'Budget and plan personal finances',
+      'Solve measurement problems with complex 3D objects',
+      'Use trigonometry in workplace contexts',
+      'Interpret and create statistical graphs'
+    ],
+    resources: [
+      { title: 'Math 20-3 Formula Sheet',     type: 'PDF',       badge: 'badge-pdf'   },
+      { title: 'Financial Math Guide',         type: 'Guide',     badge: 'badge-guide' },
+      { title: '20-3 Measurement Worksheet',   type: 'Worksheet', badge: 'badge-sheet' }
+    ]
+  },
+
+  math301: {
+    id: 'math301', label: 'Math 30-1', tag: 'Grade 12',
+    tagClass: 'tag-adv', cardClass: 'adv',
+    desc: '-1 pathway: trig, functions, permutations',
+    fullDesc: 'Mathematics 30-1 — Advanced functions, trigonometry, and pre-calculus.',
+    topics: [
+      'Trigonometric functions and graphs',
+      'Trigonometric identities',
+      'Exponential and logarithmic functions',
+      'Polynomial functions and transformations',
+      'Radical functions',
+      'Rational functions',
+      'Conic sections',
+      'Permutations and combinations',
+      'Binomial theorem',
+      'Function transformations'
+    ],
+    strands: ['Trigonometry', 'Relations and Functions', 'Permutations Combinations and Binomial Theorem'],
+    outcomes: [
+      'Analyze and graph trigonometric functions and apply identities',
+      'Solve exponential and logarithmic equations',
+      'Analyze polynomial and rational functions including intercepts and asymptotes',
+      'Apply counting principles, permutations, and combinations',
+      'Expand expressions using the Binomial Theorem'
+    ],
+    resources: [
+      { title: 'Math 30-1 Formula Sheet',     type: 'PDF',       badge: 'badge-pdf'   },
+      { title: 'Diploma Review Package',       type: 'Guide',     badge: 'badge-guide' },
+      { title: 'Trigonometry Identity Sheet',  type: 'PDF',       badge: 'badge-pdf'   },
+      { title: '30-1 Practice Exam',           type: 'Worksheet', badge: 'badge-sheet' }
+    ]
+  },
+
+  math302: {
+    id: 'math302', label: 'Math 30-2', tag: 'Grade 12',
+    tagClass: 'tag-adv', cardClass: 'adv',
+    desc: '-2 pathway: logic, statistics, probability',
+    fullDesc: 'Mathematics 30-2 — Logic, probability, and applied mathematics.',
+    topics: [
+      'Set theory and Venn diagrams',
+      'Conditional and dependent probability',
+      'Binomial distribution',
+      'Permutations and combinations',
+      'Logical reasoning and arguments',
+      'Polynomial functions applied',
+      'Exponential functions',
+      'Financial mathematics: annuities',
+      'Coordinate geometry',
+      'Quadratic functions revisited'
+    ],
+    strands: ['Logical Reasoning', 'Probability', 'Relations and Functions', 'Algebra and Number'],
+    outcomes: [
+      'Apply set theory and logic to mathematical arguments',
+      'Calculate conditional and compound probabilities',
+      'Model situations using binomial distributions',
+      'Analyze polynomial and exponential functions',
+      'Apply financial math to real-world decision making'
+    ],
+    resources: [
+      { title: 'Math 30-2 Formula Sheet',     type: 'PDF',   badge: 'badge-pdf'   },
+      { title: 'Probability Reference Sheet',  type: 'PDF',   badge: 'badge-pdf'   },
+      { title: '30-2 Diploma Prep Guide',      type: 'Guide', badge: 'badge-guide' }
+    ]
+  },
+
+  math303: {
+    id: 'math303', label: 'Math 30-3', tag: 'Grade 12',
+    tagClass: 'tag-adv', cardClass: 'adv',
+    desc: '-3 pathway: practical and trades math',
+    fullDesc: 'Mathematics 30-3 — Practical and trades mathematics for workplace and technical programs.',
+    topics: [
+      'Slope and rate of change applied',
+      'Linear and quadratic functions in the workplace',
+      'Trigonometry in trades contexts',
+      'Unit analysis and conversions',
+      'Statistics and decision making',
+      'Financial planning and loans',
+      '3D measurement and design'
+    ],
+    strands: ['Algebra', 'Geometry', 'Measurement', 'Statistics'],
+    outcomes: [
+      'Apply linear and quadratic models to workplace problems',
+      'Solve measurement and conversion problems in trades contexts',
+      'Make data-informed decisions using statistics',
+      'Apply financial formulas for budgeting and loans',
+      'Use trigonometry in applied non-abstract settings'
+    ],
+    resources: [
+      { title: 'Math 30-3 Formula Sheet',      type: 'PDF',       badge: 'badge-pdf'   },
+      { title: 'Trades Math Reference Guide',   type: 'Guide',     badge: 'badge-guide' },
+      { title: '30-3 Practice Worksheet',       type: 'Worksheet', badge: 'badge-sheet' }
+    ]
+  }
+};
+
+// ----------------------------------------------------------
+// PRACTICE QUESTIONS
+// ----------------------------------------------------------
+var QUESTIONS = {
+  'Math 7': {
+    easy: [
+      'What is -5 + 8?',
+      'Calculate 3/4 + 1/2.',
+      'What is 20% of 60?',
+      'Simplify: 3x + 2x.',
+      'What is the area of a rectangle with length 8 cm and width 5 cm?'
+    ],
+    medium: [
+      'Solve for x: 3x - 7 = 14.',
+      'A jacket costs $80 and is on sale for 25% off. What is the sale price?',
+      'Write the ratio 18:24 in simplest form.',
+      'Find the perimeter of a triangle with sides 7 cm, 9 cm, and 11 cm.',
+      'If a car travels 150 km in 3 hours, what is its average speed?'
+    ],
+    hard: [
+      'A store marks up an item by 30% then discounts it by 20%. What is the overall percent change?',
+      'Solve: (2x + 3)/5 = 4 - x/2.',
+      'A rectangular prism has length 6, width 4, height 3. Find its volume and total surface area.',
+      'Angles A and B are supplementary and angle A is 40 degrees more than angle B. Find each angle.',
+      'A sequence begins: 2, 5, 8, 11 ... What is the 20th term?'
+    ]
+  },
+  'Math 8': {
+    easy: [
+      'What is the square root of 49?',
+      'Find the hypotenuse if the legs are 3 and 4.',
+      'What is 15% of 80?',
+      'What is 2/3 x 3/4?',
+      'Convert 0.75 to a fraction in simplest form.'
+    ],
+    medium: [
+      'A right triangle has legs of 5 cm and 12 cm. Find the hypotenuse.',
+      'Solve: 4x + 6 = 22.',
+      'Find the surface area of a cube with side length 5 cm.',
+      'What is the theoretical probability of rolling an even number on a standard die?',
+      'Write 3.6 as a mixed number.'
+    ],
+    hard: [
+      'A ladder 10 m long leans against a wall. The base is 6 m from the wall. How high up the wall does it reach?',
+      'Solve and graph on a number line: 3x - 2 < 10.',
+      'Find the volume of a cylinder with radius 4 cm and height 9 cm. Use pi = 3.14.',
+      'If P(A) = 0.4 and P(B) = 0.3 and events are independent, find P(A and B).',
+      'A rectangle has area 48 cm squared and perimeter 28 cm. Find its dimensions.'
+    ]
+  },
+  'Math 9': {
+    easy: [
+      'Simplify: x squared times x cubed.',
+      'Add the polynomials: (3x + 4) + (2x - 1).',
+      'What is the slope of y = 3x + 7?',
+      'Evaluate: 2 to the power of 3.',
+      'Simplify: (2x squared) cubed.'
+    ],
+    medium: [
+      'Factor: x squared - 5x + 6.',
+      'Find the slope between points (2, 3) and (6, 11).',
+      'Expand: (x + 3)(x - 2).',
+      'Solve: 2x + 5 = 3x - 1.',
+      'Two triangles are similar with ratio 2:3. The small triangle has area 8 cm squared. Find the area of the large triangle.'
+    ],
+    hard: [
+      'Factor fully: 2x cubed - 8x.',
+      'Write the equation of a line through (1, 4) and (3, 10).',
+      'Simplify: (3x squared y)(2xy cubed) divided by (6x squared y squared).',
+      'The length of a rectangle is 3 more than twice its width. The perimeter is 48. Find the dimensions.',
+      'Solve the system: 2x + y = 8 and x - y = 1.'
+    ]
+  },
+  'Math 10C': {
+    easy: [
+      'Convert 5 feet to inches.',
+      'Find sin(30 degrees).',
+      'What is the slope of the line 2x + 3y = 6?',
+      'Factor: x squared - 9.',
+      'Evaluate f(3) if f(x) = 2x - 1.'
+    ],
+    medium: [
+      'A right triangle has an angle of 40 degrees. The adjacent side is 10 cm. Find the opposite side.',
+      'Solve the system: y = 2x + 1 and y = -x + 7.',
+      'Factor: 2x squared + 5x + 3.',
+      'State the domain and range of f(x) = square root of (x - 2).',
+      'Convert 3 metres to feet. Use 1 m = 3.28 ft.'
+    ],
+    hard: [
+      'A 25 m ladder makes a 65 degree angle with the ground. How high does it reach?',
+      'Solve and check: 2x/(x-1) = 3 + 2/(x-1).',
+      'Factor completely: 3x cubed - 12x.',
+      'Is y = x squared a function? State its domain and range.',
+      'A boat travels 15 km east then 8 km north. Find the direct distance from start and the angle from east.'
+    ]
+  },
+  'Math 20-1': {
+    easy: [
+      'Simplify: square root of 50.',
+      'Factor: x squared - 4.',
+      'What is the vertex of y = (x - 2) squared + 3?',
+      'Simplify: square root of 12 + square root of 27.',
+      'Evaluate: 4 to the power of 3/2.'
+    ],
+    medium: [
+      'Solve using the quadratic formula: 2x squared - 5x - 3 = 0.',
+      'Write y = x squared + 6x + 5 in vertex form.',
+      'Simplify: (2 root 3)(3 root 6).',
+      'Find the 8th term of the arithmetic sequence: 3, 7, 11 ...',
+      'Find the sum of the first 10 terms of 2 + 5 + 8 ...'
+    ],
+    hard: [
+      'Find the vertex and axis of symmetry of y = -2x squared + 8x - 3.',
+      'Solve: square root of (2x + 3) = x - 1. Check for extraneous roots.',
+      'Simplify: (x squared - 9)/(x squared - x - 6) divided by (x + 3)/(2x + 4).',
+      'The second term of a geometric sequence is 6 and the fifth term is 48. Find the common ratio and first term.',
+      'Solve the system: y = x squared and y = x + 6.'
+    ]
+  },
+  'Math 30-1': {
+    easy: [
+      'Convert 180 degrees to radians.',
+      'State the period of y = sin(x).',
+      'What is log base 2 of 8?',
+      'Evaluate: 8 P 3.',
+      'Simplify: log(100).'
+    ],
+    medium: [
+      'State the Pythagorean identity: sin squared x + cos squared x = ?',
+      'Solve: 2sin(x) = 1 for x in [0, 360 degrees].',
+      'Evaluate: 10 C 3.',
+      'Solve: 2 to the power of (x + 1) = 16.',
+      'State the domain and range of y = log(x + 2).'
+    ],
+    hard: [
+      'Prove: 1 + tan squared x = sec squared x.',
+      'Solve: 2cos squared x - cos x - 1 = 0 for x in [0, 2pi].',
+      'Find the 4th term in the expansion of (x + 2) to the power of 5 using the Binomial Theorem.',
+      'Solve: log(x) + log(x - 3) = 1.',
+      'How many different 5-card hands can be dealt from a standard 52-card deck?'
+    ]
+  }
+};
+
+// ----------------------------------------------------------
+// HINTS
+// ----------------------------------------------------------
+var HINTS = {
+  'Math 7': {
+    easy: [
+      'On a number line, move 8 units right from -5.',
+      'Find a common denominator first: 3/4 + 2/4.',
+      '20% = 0.20. Multiply 0.20 by 60.',
+      'Add the coefficients: 3 + 2.',
+      'Area = length x width.'
+    ],
+    medium: [
+      'Add 7 to both sides, then divide by 3.',
+      'Find 25% of $80, then subtract from $80.',
+      'Divide both numbers by their GCF which is 6.',
+      'Add all three side lengths together.',
+      'Speed = Distance divided by Time.'
+    ],
+    hard: [
+      'Calculate each percent change step by step on the running price.',
+      'Multiply both sides by 10 to clear the fractions first.',
+      'Volume = l x w x h. Surface area = 2(lw + lh + wh).',
+      'Supplementary angles add to 180. Set up two equations.',
+      'nth term = a + (n-1)d. Here a=2 and d=3.'
+    ]
+  },
+  'Math 8': {
+    easy: [
+      'What number times itself gives 49?',
+      'Use a squared + b squared = c squared with a=3 and b=4.',
+      '15/100 x 80.',
+      'Multiply numerators together and denominators together.',
+      '0.75 = 75/100. Simplify by dividing by 25.'
+    ],
+    medium: [
+      'Use a squared + b squared = c squared: 5 squared + 12 squared.',
+      'Subtract 6 from both sides, then divide by 4.',
+      'Surface area of a cube = 6 x s squared.',
+      'Even numbers on a die are 2, 4, 6. That is 3 out of 6.',
+      '3.6 = 3 + 3/5 = 3 and 3/5.'
+    ],
+    hard: [
+      'c = 10 and a = 6. Find b using a squared + b squared = c squared.',
+      'Add 2 to both sides to get 3x < 12, then divide by 3.',
+      'Volume = pi x r squared x h. Use pi = 3.14.',
+      'P(A and B) = P(A) x P(B) for independent events.',
+      'Set up: l x w = 48 and 2l + 2w = 28. Solve the system.'
+    ]
+  },
+  'Math 9': {
+    easy: [
+      'When multiplying same base, add the exponents: 2 + 3 = 5.',
+      'Combine x terms and constant terms separately.',
+      'In y = mx + b, m is the slope.',
+      '2 x 2 x 2.',
+      'Power rule: multiply the exponents. Coefficient gets cubed too.'
+    ],
+    medium: [
+      'Find two numbers that multiply to 6 and add to -5.',
+      'Slope = (y2 - y1) divided by (x2 - x1).',
+      'FOIL: First, Outer, Inner, Last.',
+      'Move all x terms to one side and constants to the other.',
+      'Area ratio equals (side ratio) squared. 2/3 squared = 4/9.'
+    ],
+    hard: [
+      'Factor out 2x first, then factor x squared - 4 as a difference of squares.',
+      'Find slope first, then use y - y1 = m(x - x1).',
+      'Multiply numerators and denominators, then cancel common factors.',
+      'Let w = width. Then l = 2w + 3. Substitute into 2l + 2w = 48.',
+      'Add the two equations to eliminate y.'
+    ]
+  },
+  'Math 10C': {
+    easy: [
+      '1 foot = 12 inches.',
+      'sin(30) = 1/2. Memorize the special triangle values.',
+      'Rearrange to y = mx + b form.',
+      'Difference of squares: a squared - b squared = (a+b)(a-b).',
+      'Replace every x with 3 and calculate.'
+    ],
+    medium: [
+      'tan(40) = opposite / adjacent. Use a calculator.',
+      'Set the two y expressions equal to each other.',
+      'Try the ac-method: a x c = 6. Find factors of 6 that add to 5.',
+      'Domain: x - 2 must be greater than or equal to 0. Range: y >= 0.',
+      'Multiply 3 by 3.28.'
+    ],
+    hard: [
+      'Height = 25 x sin(65).',
+      'Multiply both sides by (x-1). Check x=1 as a restriction.',
+      'Factor out 3x first, then factor what remains.',
+      'Yes it is a function. Domain: all real numbers. Range: y >= 0.',
+      'Distance: square root of (15 squared + 8 squared). Angle = arctan(8/15).'
+    ]
+  },
+  'Math 20-1': {
+    easy: [
+      'Root 50 = root(25 x 2) = 5 root 2.',
+      'Difference of squares: a squared - b squared = (a+b)(a-b).',
+      'Vertex form y = a(x-h) squared + k. Read off (h, k).',
+      'Root 12 = 2 root 3. Root 27 = 3 root 3. Add like radicals.',
+      '4 to the 3/2 = (root 4) cubed = 2 cubed = 8.'
+    ],
+    medium: [
+      'x = [5 +/- root(25 + 24)] / 4.',
+      'Complete the square: half of 6 is 3, square it to get 9.',
+      'Multiply coefficients: 2 x 3 = 6. Root 3 x root 6 = root 18 = 3 root 2.',
+      'a_n = 3 + (n-1) x 4. Substitute n = 8.',
+      'S_n = n/2 x (2a + (n-1)d).'
+    ],
+    hard: [
+      'h = -b/(2a). Substitute back to find k.',
+      'Square both sides then check in the original for extraneous roots.',
+      'Factor all numerators and denominators first, then cancel.',
+      'Divide t5 by t2 to get r cubed. Solve for r, then find a.',
+      'Substitute x squared for y in the linear equation and solve.'
+    ]
+  },
+  'Math 30-1': {
+    easy: [
+      'Radians = degrees x pi/180.',
+      'sin(x) completes one cycle every 2pi radians or 360 degrees.',
+      '2 to what power equals 8?',
+      '8 x 7 x 6 = 336.',
+      'log(100) = log(10 squared) = 2.'
+    ],
+    medium: [
+      'This is the Pythagorean identity. It equals 1.',
+      'sin(x) = 1/2 at x = 30 degrees and x = 150 degrees.',
+      '10 x 9 x 8 divided by (3 x 2 x 1).',
+      'Rewrite 16 as 2 to the 4th. Then equate exponents.',
+      'Domain: x + 2 > 0 so x > -2. Range: all real numbers.'
+    ],
+    hard: [
+      'Divide both sides of sin squared + cos squared = 1 by cos squared.',
+      'Let u = cos x. Solve 2u squared - u - 1 = 0, then find angles.',
+      'T(k+1) = C(5,k) x x to the (5-k) x 2 to the k. Use k = 3.',
+      'Combine using log rules: log(x(x-3)) = 1 means x(x-3) = 10.',
+      'C(52,5) = 52! / (5! x 47!).'
+    ]
+  }
+};
+
+// ----------------------------------------------------------
+// STATE
+// ----------------------------------------------------------
+var currentGrade  = null;
+var practiceDiff  = 'easy';
+var practiceGrade = 'Math 7';
+
+// ----------------------------------------------------------
+// NAVIGATION
+// ----------------------------------------------------------
+function showPage(id) {
+  var pages = document.querySelectorAll('.page');
+  for (var i = 0; i < pages.length; i++) {
+    pages[i].classList.remove('active');
+  }
+  var target = document.getElementById('page-' + id);
+  if (target) target.classList.add('active');
+
+  var order = ['home', 'grades', 'practice', 'resources', 'about', 'contact'];
+  var btns = document.querySelectorAll('.nav-link');
+  for (var j = 0; j < btns.length; j++) {
+    btns[j].classList.toggle('active', order[j] === id);
+  }
+
+  document.getElementById('navLinks').classList.remove('open');
+  window.scrollTo(0, 0);
+}
+
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+// ----------------------------------------------------------
+// BUILD GRADE CARDS
+// ----------------------------------------------------------
+function buildGradeCard(g, clickFn) {
+  var card = document.createElement('div');
+  card.className = 'grade-card ' + g.cardClass;
+  card.onclick = clickFn;
+  card.innerHTML =
+    '<span class="grade-tag ' + g.tagClass + '">' + g.tag + '</span>' +
+    '<h3>' + g.label + '</h3>' +
+    '<p>' + g.desc + '</p>' +
+    '<div class="grade-arrow">View Details &rarr;</div>';
+  return card;
+}
+
+function buildAllGradeCards() {
+  var homeGrid = document.getElementById('homeGradeGrid');
+  var keys = Object.keys(GRADES);
+  for (var i = 0; i < keys.length; i++) {
+    (function(gid) {
+      homeGrid.appendChild(buildGradeCard(GRADES[gid], function() { openGradeDetail(gid); }));
+    })(keys[i]);
+  }
+
+  var groups = [
+    ['gradesJrGrid',   ['math7','math8','math9']],
+    ['gradesSr10Grid', ['math10c','math103']],
+    ['gradesSr20Grid', ['math201','math202','math203']],
+    ['gradesSr30Grid', ['math301','math302','math303']]
+  ];
+
+  for (var g = 0; g < groups.length; g++) {
+    var containerId = groups[g][0];
+    var ids = groups[g][1];
+    var container = document.getElementById(containerId);
+    for (var k = 0; k < ids.length; k++) {
+      (function(gid) {
+        container.appendChild(buildGradeCard(GRADES[gid], function() { openGradeDetail(gid); }));
+      })(ids[k]);
+    }
+  }
+}
+
+// ----------------------------------------------------------
+// GRADE DETAIL
+// ----------------------------------------------------------
+function openGradeDetail(gid) {
+  var g = GRADES[gid];
+  if (!g) return;
+  currentGrade = g;
+
+  document.getElementById('gradeDetailTitle').textContent      = g.label;
+  document.getElementById('gradeDetailDesc').textContent       = g.fullDesc;
+  document.getElementById('gradeDetailBreadcrumb').textContent = g.label;
+  document.getElementById('practiceGradeName').textContent     = g.label;
+
+  var topicsHTML = '';
+  for (var i = 0; i < g.topics.length; i++) {
+    topicsHTML += '<li class="topic-item"><span class="topic-dot"></span>' + g.topics[i] + '</li>';
+  }
+  document.getElementById('detailTopics').innerHTML = topicsHTML;
+
+  var strandsHTML = '';
+  for (var s = 0; s < g.strands.length; s++) {
+    strandsHTML += '<li class="topic-item"><span class="topic-dot" style="background:var(--accent)"></span>' + g.strands[s] + '</li>';
+  }
+  document.getElementById('detailStrands').innerHTML = strandsHTML;
+
+  var outHTML = '';
+  for (var o = 0; o < g.outcomes.length; o++) {
+    outHTML += '<div class="outcome-item">&#10003; ' + g.outcomes[o] + '</div>';
+  }
+  document.getElementById('detailOutcomes').innerHTML = outHTML;
+
+  var resHTML = '';
+  for (var r = 0; r < g.resources.length; r++) {
+    var res = g.resources[r];
+    resHTML +=
+      '<div class="resource-card">' +
+      '<div class="res-icon-bg res-blue">&#128196;</div>' +
+      '<span class="resource-badge ' + res.badge + '">' + res.type + '</span>' +
+      '<h3>' + res.title + '</h3>' +
+      '<p>' + g.label + ' resource for students and teachers.</p>' +
+      '<button class="dl-btn" onclick="alertDl(\'' + res.title.replace(/'/g, "\\'") + '\')">Download ' + res.type + '</button>' +
+      '</div>';
+  }
+  document.getElementById('detailResources').innerHTML = resHTML;
+
+  // Reset tabs
+  var detailSection = document.querySelector('#page-grade-detail .section');
+  var tabBtns = detailSection.querySelectorAll('.tab-btn');
+  var tabPanels = detailSection.querySelectorAll('.tab-panel');
+  for (var tb = 0; tb < tabBtns.length; tb++) {
+    tabBtns[tb].classList.toggle('active', tb === 0);
+  }
+  for (var tp = 0; tp < tabPanels.length; tp++) {
+    tabPanels[tp].classList.toggle('active', tp === 0);
+  }
+
+  document.getElementById('detailQuestions').innerHTML = '';
+  var diffBtns = document.querySelectorAll('#detailDiffBtns .diff-btn');
+  for (var db = 0; db < diffBtns.length; db++) {
+    diffBtns[db].classList.remove('active');
+  }
+
+  showPage('grade-detail');
+}
+
+// ----------------------------------------------------------
+// TABS
+// ----------------------------------------------------------
+function switchTab(btn, panelId) {
+  var tabBar = btn.closest('.tab-bar');
+  var allBtns = tabBar.querySelectorAll('.tab-btn');
+  for (var i = 0; i < allBtns.length; i++) {
+    allBtns[i].classList.remove('active');
+  }
+  btn.classList.add('active');
+
+  var parent = tabBar.parentElement;
+  var allPanels = parent.querySelectorAll('.tab-panel');
+  for (var j = 0; j < allPanels.length; j++) {
+    allPanels[j].classList.remove('active');
+  }
+  var target = document.getElementById('tab-' + panelId);
+  if (target) target.classList.add('active');
+}
+
+// ----------------------------------------------------------
+// DIFFICULTY — GRADE DETAIL PAGE
+// ----------------------------------------------------------
+function selectDiff(btn, diff) {
+  var allBtns = document.querySelectorAll('#detailDiffBtns .diff-btn');
+  for (var i = 0; i < allBtns.length; i++) {
+    allBtns[i].classList.remove('active');
+  }
+  btn.classList.add('active');
+
+  var label = currentGrade ? currentGrade.label : 'Math 7';
+  var qPool = QUESTIONS[label] || QUESTIONS['Math 7'];
+  var qs    = qPool[diff]      || qPool.easy;
+  var hPool = HINTS[label]     || HINTS['Math 7'];
+  var hints = hPool[diff]      || hPool.easy;
+
+  var html = '';
+  var count = Math.min(qs.length, 4);
+  for (var i = 0; i < count; i++) {
+    html +=
+      '<div class="question-box">' +
+      '<div class="question-num">Question ' + (i + 1) + '</div>' +
+      '<div class="question-text">' + qs[i] + '</div>' +
+      '<textarea class="answer-area" placeholder="Type your answer here..."></textarea>' +
+      '<div><button class="hint-btn" onclick="toggleHint(this)">Show Hint</button></div>' +
+      '<div class="question-hint">' + (hints[i] || 'Work through it step by step!') + '</div>' +
+      '</div>';
+  }
+  document.getElementById('detailQuestions').innerHTML = html;
+}
+
+function toggleHint(btn) {
+  var hint = btn.parentElement.nextElementSibling;
+  hint.classList.toggle('visible');
+  btn.textContent = hint.classList.contains('visible') ? 'Hide Hint' : 'Show Hint';
+}
+
+// ----------------------------------------------------------
+// PRACTICE PAGE
+// ----------------------------------------------------------
+function selectPracticeGrade(btn, grade) {
+  var all = document.querySelectorAll('.grade-select-btn');
+  for (var i = 0; i < all.length; i++) all[i].classList.remove('active');
+  btn.classList.add('active');
+  practiceGrade = grade;
+}
+
+function selectPracticeDiff(btn, diff) {
+  var all = document.querySelectorAll('.practice-controls .diff-btn');
+  for (var i = 0; i < all.length; i++) all[i].classList.remove('active');
+  btn.classList.add('active');
+  practiceDiff = diff;
+}
+
+function generatePracticeQuestions() {
+  var qPool  = QUESTIONS[practiceGrade] || QUESTIONS['Math 7'];
+  var qs     = qPool[practiceDiff]      || qPool.easy;
+  var hPool  = HINTS[practiceGrade]     || HINTS['Math 7'];
+  var hints  = hPool[practiceDiff]      || hPool.easy;
+
+  var labels  = { easy: 'Easy', medium: 'Medium', hard: 'Hard' };
+  var classes = { easy: 'q-easy', medium: 'q-medium', hard: 'q-hard' };
+
+  var html = '';
+  for (var i = 0; i < qs.length; i++) {
+    var safeHint = (hints[i] || 'Think step by step!').replace(/'/g, '&#39;').replace(/"/g, '&quot;');
+    html +=
+      '<div class="q-card">' +
+      '<span class="q-difficulty ' + classes[practiceDiff] + '">' + labels[practiceDiff] + '</span>' +
+      '<div class="q-text">' + (i + 1) + '. ' + qs[i] + '</div>' +
+      '<input type="text" class="q-input" placeholder="Your answer..." />' +
+      '<div class="q-actions">' +
+      '<button class="q-btn q-btn-hint" onclick="showQHint(this,\'' + safeHint + '\')">Hint</button>' +
+      '<button class="q-btn q-btn-check" onclick="checkAnswer(this)">Check Answer</button>' +
+      '</div>' +
+      '<div class="q-hint-text"></div>' +
+      '<div class="q-result"></div>' +
+      '</div>';
+  }
+  document.getElementById('practiceQuestionsContainer').innerHTML = html;
+}
+
+function showQHint(btn, hint) {
+  var card   = btn.closest('.q-card');
+  var hintEl = card.querySelector('.q-hint-text');
+  var showing = hintEl.style.display === 'block';
+  hintEl.textContent = hint;
+  hintEl.style.display = showing ? 'none' : 'block';
+}
+
+function checkAnswer(btn) {
+  var card   = btn.closest('.q-card');
+  var input  = card.querySelector('.q-input');
+  var result = card.querySelector('.q-result');
+
+  if (!input.value.trim()) {
+    result.className = 'q-result q-incorrect';
+    result.textContent = 'Please enter an answer first.';
+    result.style.display = 'block';
+    return;
+  }
+  result.className = 'q-result q-correct';
+  result.textContent = 'Answer submitted! Review with your teacher or check the solution guide.';
+  result.style.display = 'block';
+}
+
+// ----------------------------------------------------------
+// CONTACT FORM
+// ----------------------------------------------------------
+function submitForm() {
+  var name  = document.getElementById('cName').value.trim();
+  var email = document.getElementById('cEmail').value.trim();
+  var msg   = document.getElementById('cMsg').value.trim();
+
+  if (!name || !email || !msg) {
+    alert('Please fill in your name, email address, and message before submitting.');
+    return;
+  }
+  var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+
+  document.getElementById('formSuccess').style.display = 'block';
+  document.getElementById('cName').value  = '';
+  document.getElementById('cEmail').value = '';
+  document.getElementById('cRole').value  = '';
+  document.getElementById('cMsg').value   = '';
+}
+
+// ----------------------------------------------------------
+// DOWNLOAD PLACEHOLDER
+// ----------------------------------------------------------
+function alertDl(name) {
+  alert('Download: "' + name + '"\n\nIn a full deployment, this button downloads the actual PDF or document file. Replace the onclick with a direct link to your hosted file.');
+}
+
+// ----------------------------------------------------------
+// INIT
+// ----------------------------------------------------------
+buildAllGradeCards();
