@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alberta Math 7–12</title>
+  <title>Alberta Math 7&#8211;12</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet" />
 </head>
@@ -30,6 +30,15 @@
   </div>
 </nav>
 
+<!-- VISITOR COUNTER BANNER -->
+<div class="visitor-banner" id="visitorBanner">
+  <div class="visitor-inner">
+    <span class="visitor-icon">&#128100;</span>
+    <span id="visitorText">Loading visitor count...</span>
+    <span class="visitor-session" id="sessionText"></span>
+  </div>
+</div>
+
 <!-- HOME -->
 <div id="page-home" class="page active">
   <div class="hero">
@@ -47,34 +56,38 @@
       <span class="chip">Practice Questions</span>
     </div>
   </div>
+
   <div class="stats-band">
     <div class="stats-inner">
       <div><div class="stat-val">10+</div><div class="stat-label">Courses</div></div>
       <div><div class="stat-val">60+</div><div class="stat-label">Units</div></div>
       <div><div class="stat-val">500+</div><div class="stat-label">Practice Questions</div></div>
-      <div><div class="stat-val">Free</div><div class="stat-label">Always Free</div></div>
+      <div><div class="stat-val" id="statVisitors">...</div><div class="stat-label">Site Visits</div></div>
     </div>
   </div>
+
   <div class="grades-band">
     <div class="grades-inner">
       <div class="section-label">Browse by Grade</div>
       <div class="section-title">Find Your Grade Level</div>
-      <p class="section-desc">Choose your grade or course to access lessons, curriculum topics, practice questions, and exams.</p>
+      <p class="section-desc">Choose your grade or course to access lessons, topics, practice questions, and downloadable resources.</p>
       <div class="grade-grid" id="homeGradeGrid"></div>
     </div>
   </div>
+
   <div class="section">
     <div class="section-label">What We Offer</div>
     <div class="section-title">Everything You Need to Succeed</div>
     <div class="feature-grid">
       <div class="feature-card"><div class="feature-icon">&#128218;</div><h3>Full Lesson Notes</h3><p>Detailed lessons for every unit with explanations, worked examples, graphs, and diagrams.</p></div>
       <div class="feature-card"><div class="feature-icon">&#9999;&#65039;</div><h3>500+ Practice Questions</h3><p>Easy, medium, and hard questions for every grade level with instant hints.</p></div>
-      <div class="feature-card"><div class="feature-icon">&#128196;</div><h3>Formula Sheets &amp; Study Notes</h3><p>Downloadable formula sheets, study guides, and reference notes by unit.</p></div>
-      <div class="feature-card"><div class="feature-icon">&#128221;</div><h3>Unit Exams</h3><p>Full unit exams with answer keys for every grade level to prepare students for real tests.</p></div>
+      <div class="feature-card"><div class="feature-icon">&#128196;</div><h3>Downloadable PDFs</h3><p>Formula sheets, study notes, worksheets, and full unit exams — all generated and downloaded instantly.</p></div>
+      <div class="feature-card"><div class="feature-icon">&#128221;</div><h3>Unit Exams</h3><p>Full unit exams with answer keys for every grade level to prepare for real tests.</p></div>
       <div class="feature-card"><div class="feature-icon">&#128200;</div><h3>Graphs &amp; Diagrams</h3><p>Visual aids, coordinate grids, geometric figures, and function graphs built into every lesson.</p></div>
-      <div class="feature-card"><div class="feature-icon">&#127358;</div><h3>Completely Free</h3><p>No sign-up, no subscription. All resources and practice questions are always free.</p></div>
+      <div class="feature-card"><div class="feature-icon">&#127358;</div><h3>Completely Free</h3><p>No sign-up, no subscription. All resources are always free for Alberta students.</p></div>
     </div>
   </div>
+
   <div class="divider"></div>
   <div class="section cta-section">
     <div class="section-title">Ready to Start Learning?</div>
@@ -88,7 +101,7 @@
   <div class="hero hero-sm">
     <div class="hero-badge">All Grade Levels</div>
     <h1>Alberta Math <em>Courses</em></h1>
-    <p>Select a grade or course below to explore lessons, topics, outcomes, and practice questions.</p>
+    <p>Select a grade or course to explore lessons, topics, and downloadable resources.</p>
   </div>
   <div class="grades-band">
     <div class="grades-inner">
@@ -129,21 +142,18 @@
       <button class="tab-btn" onclick="switchTab(this,'practice-tab')">Practice</button>
       <button class="tab-btn" onclick="switchTab(this,'resources-tab')">Resources &amp; Exams</button>
     </div>
-
     <div id="tab-overview" class="tab-panel active">
       <div class="content-grid">
         <div class="content-card"><h3>Key Topics</h3><ul class="topic-list" id="detailTopics"></ul></div>
         <div class="content-card"><h3>Learning Outcomes</h3><div class="outcomes-list" id="detailOutcomes"></div></div>
       </div>
     </div>
-
     <div id="tab-lessons" class="tab-panel">
       <div id="lessonsContainer"></div>
     </div>
-
     <div id="tab-practice-tab" class="tab-panel">
       <div class="practice-inner">
-        <p class="text-muted">Practice questions for <span id="practiceGradeName"></span>. Choose a difficulty level to begin.</p>
+        <p class="text-muted">Practice questions for <span id="practiceGradeName"></span>. Choose a difficulty level.</p>
         <div class="difficulty-btns" id="detailDiffBtns">
           <button class="diff-btn easy"   onclick="selectDiff(this,'easy')">Easy</button>
           <button class="diff-btn medium" onclick="selectDiff(this,'medium')">Medium</button>
@@ -152,7 +162,6 @@
         <div id="detailQuestions"></div>
       </div>
     </div>
-
     <div id="tab-resources-tab" class="tab-panel">
       <div id="gradeResourcesContainer"></div>
     </div>
@@ -198,44 +207,30 @@
   <div class="about-hero">
     <div class="hero-badge">Study Materials</div>
     <h1>Resources &amp; Study Guides</h1>
-    <p>Formula sheets, study notes, worksheets, exams, and useful links for Alberta Math students.</p>
+    <p>All resources are generated and downloaded instantly as PDF files &mdash; no login required.</p>
   </div>
   <div class="section">
     <div class="tab-bar">
       <button class="tab-btn active" onclick="switchTab(this,'res-formula')">Formula Sheets</button>
       <button class="tab-btn" onclick="switchTab(this,'res-guides')">Study Notes</button>
       <button class="tab-btn" onclick="switchTab(this,'res-exams')">Practice Exams</button>
-      <button class="tab-btn" onclick="switchTab(this,'res-links')">Useful Links</button>
       <button class="tab-btn" onclick="switchTab(this,'res-ws')">Worksheets</button>
+      <button class="tab-btn" onclick="switchTab(this,'res-links')">Useful Links</button>
     </div>
-    <div id="tab-res-formula" class="tab-panel active">
-      <p class="text-muted mb-sm">Downloadable formula sheets organized by grade level.</p>
-      <div class="resource-grid" id="globalFormulaGrid"></div>
-    </div>
-    <div id="tab-res-guides" class="tab-panel">
-      <p class="text-muted mb-sm">Comprehensive study notes covering major topics for each course.</p>
-      <div class="resource-grid" id="globalGuidesGrid"></div>
-    </div>
-    <div id="tab-res-exams" class="tab-panel">
-      <p class="text-muted mb-sm">Full practice exams with answer keys for every grade level.</p>
-      <div class="resource-grid" id="globalExamsGrid"></div>
-    </div>
-    <div id="tab-res-links" class="tab-panel">
+    <div id="tab-res-formula" class="tab-panel active"><div class="resource-grid" id="globalFormulaGrid"></div></div>
+    <div id="tab-res-guides"  class="tab-panel"><div class="resource-grid" id="globalGuidesGrid"></div></div>
+    <div id="tab-res-exams"   class="tab-panel"><div class="resource-grid" id="globalExamsGrid"></div></div>
+    <div id="tab-res-ws"      class="tab-panel"><div class="resource-grid" id="globalWorksheetGrid"></div></div>
+    <div id="tab-res-links"   class="tab-panel">
       <p class="text-muted mb-sm">Recommended external resources for Alberta math students.</p>
       <div class="links-list">
         <div class="link-item"><div><a href="https://www.alberta.ca/curriculum" target="_blank" rel="noopener">Alberta Education Curriculum</a><div class="link-desc">Official Alberta Education curriculum documents and program of studies</div></div><span class="resource-badge badge-link">Official</span></div>
         <div class="link-item"><div><a href="https://www.khanacademy.org/math" target="_blank" rel="noopener">Khan Academy &#8211; Math</a><div class="link-desc">Free video lessons and practice for all grade levels</div></div><span class="resource-badge badge-link">Free</span></div>
-        <div class="link-item"><div><a href="https://www.desmos.com/calculator" target="_blank" rel="noopener">Desmos Graphing Calculator</a><div class="link-desc">Free online graphing calculator &mdash; essential for senior high courses</div></div><span class="resource-badge badge-link">Tool</span></div>
-        <div class="link-item"><div><a href="https://www.desmos.com/scientific" target="_blank" rel="noopener">Desmos Scientific Calculator</a><div class="link-desc">Free online scientific calculator for junior and senior high</div></div><span class="resource-badge badge-link">Tool</span></div>
-        <div class="link-item"><div><a href="https://www.wolframalpha.com" target="_blank" rel="noopener">Wolfram Alpha</a><div class="link-desc">Step-by-step math problem solver and reference tool</div></div><span class="resource-badge badge-link">Tool</span></div>
-        <div class="link-item"><div><a href="https://www.mathway.com" target="_blank" rel="noopener">Mathway</a><div class="link-desc">Instant math problem solver for algebra and beyond</div></div><span class="resource-badge badge-link">Free</span></div>
-        <div class="link-item"><div><a href="https://www.geogebra.org" target="_blank" rel="noopener">GeoGebra</a><div class="link-desc">Free geometry, algebra, and calculus tools with interactive graphs</div></div><span class="resource-badge badge-link">Tool</span></div>
+        <div class="link-item"><div><a href="https://www.desmos.com/calculator" target="_blank" rel="noopener">Desmos Graphing Calculator</a><div class="link-desc">Free online graphing calculator</div></div><span class="resource-badge badge-link">Tool</span></div>
+        <div class="link-item"><div><a href="https://www.geogebra.org" target="_blank" rel="noopener">GeoGebra</a><div class="link-desc">Free geometry, algebra, and calculus tools</div></div><span class="resource-badge badge-link">Tool</span></div>
+        <div class="link-item"><div><a href="https://www.wolframalpha.com" target="_blank" rel="noopener">Wolfram Alpha</a><div class="link-desc">Step-by-step math solver</div></div><span class="resource-badge badge-link">Tool</span></div>
         <div class="link-item"><div><a href="https://brilliant.org" target="_blank" rel="noopener">Brilliant.org</a><div class="link-desc">Interactive problem solving and math courses</div></div><span class="resource-badge badge-link">Learn</span></div>
       </div>
-    </div>
-    <div id="tab-res-ws" class="tab-panel">
-      <p class="text-muted mb-sm">Printable practice worksheets by grade and topic.</p>
-      <div class="resource-grid" id="globalWorksheetGrid"></div>
     </div>
   </div>
 </div>
@@ -251,34 +246,34 @@
     <div class="about-body">
       <div class="section-label">Our Purpose</div>
       <div class="section-title">Why We Built This</div>
-      <p class="about-para">Alberta Math 7&#8211;12 was created to give students, teachers, and families a single, reliable place to access curriculum-aligned mathematics content. With the rollout of Alberta&#8217;s New Curriculum, we wanted to make the learning outcomes and topics accessible, approachable, and easy to practise.</p>
-      <p class="about-para">Whether you&#8217;re a student reviewing before a test, a teacher looking for resource ideas, or a parent supporting learning at home &mdash; this site is designed for you.</p>
+      <p class="about-para">Alberta Math 7&#8211;12 was created to give students, teachers, and families a single, reliable place to access curriculum-aligned mathematics content. All PDFs are generated instantly in your browser &mdash; nothing to install, no login required.</p>
+      <p class="about-para">Whether you are a student reviewing before a test, a teacher looking for resource ideas, or a parent supporting learning at home &mdash; this site is designed for you.</p>
     </div>
     <div class="audience-grid mt-3">
-      <div class="audience-card"><div class="audience-emoji">&#127890;</div><h3>Students</h3><p>Full lesson notes, practice questions, formula sheets, and unit exams to help you succeed.</p></div>
+      <div class="audience-card"><div class="audience-emoji">&#127890;</div><h3>Students</h3><p>Full lesson notes, practice questions, formula sheets, and unit exams available for instant PDF download.</p></div>
       <div class="audience-card"><div class="audience-emoji">&#128105;&#8205;&#127979;</div><h3>Teachers</h3><p>Curriculum maps, outcome breakdowns, lesson frameworks, and exam templates aligned to the Alberta New Curriculum.</p></div>
-      <div class="audience-card"><div class="audience-emoji">&#128106;</div><h3>Parents</h3><p>Understand what your child is learning at each grade level and find resources to support their math journey at home.</p></div>
+      <div class="audience-card"><div class="audience-emoji">&#128106;</div><h3>Parents</h3><p>Understand what your child is learning at each grade level and find downloadable resources to support them at home.</p></div>
     </div>
     <div class="curriculum-info mt-3">
       <h3>Alberta New Mathematics Curriculum</h3>
-      <p>This website is aligned with the <strong>Alberta New Mathematics Curriculum</strong>. The curriculum emphasizes deep understanding, problem-solving, and mathematical reasoning. All content reflects the current program of studies for Grades 7 through 12.</p>
+      <p>All content reflects the current program of studies for Grades 7 through 12. The curriculum emphasizes deep understanding, problem-solving, and mathematical reasoning.</p>
     </div>
     <div class="content-grid mt-3">
       <div class="content-card">
         <h3>Senior High Pathways</h3>
         <div class="outcomes-list">
-          <div class="outcome-item"><strong>-1 Pathway:</strong> University-bound &mdash; advanced algebra, trigonometry, pre-calculus (10C &rarr; 20-1 &rarr; 30-1)</div>
-          <div class="outcome-item"><strong>-2 Pathway:</strong> Post-secondary applied math (10C &rarr; 20-2 &rarr; 30-2)</div>
-          <div class="outcome-item"><strong>-3 Pathway:</strong> Practical and trades mathematics (10-3 &rarr; 20-3 &rarr; 30-3)</div>
+          <div class="outcome-item"><strong>-1 Pathway:</strong> University-bound (10C &rarr; 20-1 &rarr; 30-1)</div>
+          <div class="outcome-item"><strong>-2 Pathway:</strong> Post-secondary applied (10C &rarr; 20-2 &rarr; 30-2)</div>
+          <div class="outcome-item"><strong>-3 Pathway:</strong> Practical/trades (10-3 &rarr; 20-3 &rarr; 30-3)</div>
         </div>
       </div>
       <div class="content-card">
         <h3>Curriculum Strands</h3>
         <ul class="topic-list">
-          <li><span class="topic-dot"></span>Number &mdash; number systems, operations, and properties</li>
-          <li><span class="topic-dot"></span>Patterns &amp; Relations &mdash; algebra, functions, and relationships</li>
-          <li><span class="topic-dot"></span>Shape &amp; Space &mdash; geometry, measurement, and transformations</li>
-          <li><span class="topic-dot"></span>Statistics &amp; Probability &mdash; data analysis and probability</li>
+          <li><span class="topic-dot"></span>Number &mdash; number systems and operations</li>
+          <li><span class="topic-dot"></span>Patterns &amp; Relations &mdash; algebra and functions</li>
+          <li><span class="topic-dot"></span>Shape &amp; Space &mdash; geometry and measurement</li>
+          <li><span class="topic-dot"></span>Statistics &amp; Probability &mdash; data analysis</li>
         </ul>
       </div>
     </div>
@@ -290,13 +285,13 @@
   <div class="about-hero">
     <div class="hero-badge">Get in Touch</div>
     <h1>Contact Us</h1>
-    <p>Have a question, suggestion, or want to report an error? We&#8217;d love to hear from you.</p>
+    <p>Have a question, suggestion, or want to report an error? We would love to hear from you.</p>
   </div>
   <div class="section">
     <div class="contact-layout">
       <div>
         <div class="section-label">Send a Message</div>
-        <div class="section-title contact-title">We&#8217;re Here to Help</div>
+        <div class="section-title contact-title">We are Here to Help</div>
         <div class="contact-form">
           <div class="form-group"><label for="cName">Full Name</label><input type="text" id="cName" placeholder="Your name" /></div>
           <div class="form-group"><label for="cEmail">Email Address</label><input type="email" id="cEmail" placeholder="you@email.com" /></div>
@@ -314,12 +309,12 @@
         <div class="contact-info-grid">
           <div class="info-card"><div class="info-icon">&#128231;</div><h4>Email</h4><p>info@albertamath712.ca</p></div>
           <div class="info-card"><div class="info-icon">&#128205;</div><h4>Location</h4><p>Alberta, Canada</p></div>
-          <div class="info-card"><div class="info-icon">&#128336;</div><h4>Response Time</h4><p>Within 2&#8211;3 business days</p></div>
+          <div class="info-card"><div class="info-icon">&#128336;</div><h4>Response Time</h4><p>2&#8211;3 business days</p></div>
           <div class="info-card"><div class="info-icon">&#128218;</div><h4>Curriculum</h4><p>Alberta New Curriculum</p></div>
         </div>
         <div class="curriculum-info" style="margin-top:1.5rem">
-          <h3>Feedback Welcome</h3>
-          <p>Notice an error or want to suggest a topic? We are always looking to improve. Teacher contributions for practice questions, lessons, and exams are especially welcome.</p>
+          <h3>Site Statistics</h3>
+          <p id="contactStats">Loading statistics...</p>
         </div>
       </div>
     </div>
@@ -332,6 +327,7 @@
       <div>
         <div class="footer-brand"><div class="footer-brand-icon">&#8721;</div>Alberta Math 7&#8211;12</div>
         <p class="footer-desc">A free, curriculum-aligned mathematics learning platform for Alberta students, teachers, and parents in Grades 7 through 12.</p>
+        <div class="footer-counter" id="footerCounter"></div>
       </div>
       <div>
         <h4>Quick Links</h4>
